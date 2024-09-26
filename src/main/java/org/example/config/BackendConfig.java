@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -24,6 +25,7 @@ import java.util.Properties;
 @Configuration(proxyBeanMethods = false)
 @ComponentScan(basePackages = {"org.example.controller", "org.example.persistence", "org.example.service"})
 @EnableTransactionManagement
+@PropertySource(value = "classpath:application.properties", ignoreResourceNotFound = true)
 public class BackendConfig {
 
     // Using relaxed binding for property names
