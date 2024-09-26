@@ -47,14 +47,10 @@ public class BackendConfig {
 
     @Bean
     public DataSource dataSource() {
-        String jdbcUrl = propJdbcUrl;
-        String user = propJdbcUsername;
-        String password = propJdbcPassword;
-
         HikariDataSource dataSource = new HikariDataSource();
-        dataSource.setJdbcUrl(jdbcUrl);
-        dataSource.setUsername(user);
-        dataSource.setPassword(password);
+        dataSource.setJdbcUrl(propJdbcUrl);
+        dataSource.setUsername(propJdbcUsername);
+        dataSource.setPassword(propJdbcPassword);
         // dataSource.setDriverClassName("org.postgresql.Driver");
         return dataSource;
     }
