@@ -13,13 +13,13 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.SharedEntityManagerBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.Optional;
 import java.util.Properties;
 
 @Configuration(proxyBeanMethods = false)
@@ -27,6 +27,9 @@ import java.util.Properties;
 @EnableTransactionManagement
 @PropertySource(value = "classpath:application.properties", ignoreResourceNotFound = true)
 public class BackendConfig {
+
+    @Value("${application.name:#{null}}")
+    private Optional<String> appName;
 
     // Using relaxed binding for property names
     // can also read env var 'JDBC_URL'
