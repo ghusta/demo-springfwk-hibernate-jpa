@@ -23,7 +23,7 @@ import java.util.Optional;
 import java.util.Properties;
 
 @Configuration(proxyBeanMethods = false)
-@ComponentScan(basePackages = {"org.example.controller", "org.example.persistence", "org.example.service"})
+@ComponentScan(basePackages = {"org.example.persistence", "org.example.service"})
 @EnableTransactionManagement
 @PropertySource(value = "classpath:application.properties", ignoreResourceNotFound = true)
 public class BackendConfig {
