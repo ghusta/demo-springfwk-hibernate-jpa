@@ -28,13 +28,13 @@ public class BackendConfig {
 
     // Using relaxed binding for property names
     // can also read env var 'JDBC_URL'
-    @Value("${jdbc-url:jdbc:postgresql://localhost:5432/world-db}")
+    @Value("${jdbc.url:jdbc:postgresql://localhost:5432/world-db}")
     private String propJdbcUrl;
 
-    @Value("${jdbc-username:world}")
+    @Value("${jdbc.username:world}")
     private String propJdbcUsername;
 
-    @Value("${jdbc-password:world123}")
+    @Value("${jdbc.password:world123}")
     private String propJdbcPassword;
 
     // Needed to resolve ${} placeholders in @Value annotations
