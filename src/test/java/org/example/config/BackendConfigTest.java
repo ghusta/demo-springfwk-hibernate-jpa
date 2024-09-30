@@ -3,6 +3,7 @@ package org.example.config;
 import org.example.model.Country;
 import org.example.service.CountryService;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,7 @@ class BackendConfigTest {
     }
 
     @Test
+    @Disabled("Needs local database -- see IT")
     void serviceRead() {
         CountryService countryService = ctx.getBean(CountryService.class);
         List<Country> all = countryService.findAll();
@@ -49,6 +51,7 @@ class BackendConfigTest {
     }
 
     @Test
+    @Disabled("Needs local database -- see IT")
     void serviceWrite() {
         CountryService countryService = ctx.getBean(CountryService.class);
         Country newCountry = new Country();
