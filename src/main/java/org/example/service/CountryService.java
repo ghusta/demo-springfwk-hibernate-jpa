@@ -1,7 +1,7 @@
 package org.example.service;
 
 import org.example.model.Country;
-import org.example.persistence.CountryRepository;
+import org.example.persistence.hibernate.CountryRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

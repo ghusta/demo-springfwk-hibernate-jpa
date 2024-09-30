@@ -38,7 +38,7 @@ class BackendConfigTest {
         assertThat(beanDefinitionNames)
                 .hasSizeGreaterThan(10)
                 .contains("entityManagerBean", "entityManagerFactoryBean", "dataSource", "txManager")
-                .contains("countryService", "countryRepository");
+                .contains("countryService", "countryRepositoryHibernate", "countryRepositoryJpa");
     }
 
     @Test

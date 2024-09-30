@@ -1,4 +1,4 @@
-package org.example.persistence;
+package org.example.persistence.hibernate;
 
 import org.example.model.Country;
 import org.hibernate.Session;
@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Repository("countryRepositoryHibernate")
 public class CountryRepository {
 
     @PersistenceContext
