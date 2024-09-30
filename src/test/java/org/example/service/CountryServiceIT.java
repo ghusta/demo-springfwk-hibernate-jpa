@@ -40,9 +40,12 @@ class CountryServiceIT {
 
     @DynamicPropertySource
     static void jdbcProperties(DynamicPropertyRegistry registry) {
+        registry.add("jdbc.url", () -> postgresWorldDB.getJdbcUrl());
+        registry.add("jdbc.username", () -> postgresWorldDB.getUsername());
+        registry.add("jdbc.password", () -> postgresWorldDB.getPassword());
+
         registry.add("unused.jdbc.host", () -> postgresWorldDB.getHost());
         registry.add("unused.jdbc.port", () -> postgresWorldDB.getMappedPort(5432));
-        registry.add("jdbc.url", () -> postgresWorldDB.getJdbcUrl());
     }
 
     @Test
