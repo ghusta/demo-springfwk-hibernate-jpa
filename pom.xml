@@ -20,7 +20,7 @@
 
         <spring-framework.version>5.3.39</spring-framework.version>
         <hibernate.version>5.6.15.Final</hibernate.version>
-        <testcontainers.version>1.20.1</testcontainers.version>
+        <testcontainers.version>1.20.2</testcontainers.version>
     </properties>
 
     <dependencyManagement>
