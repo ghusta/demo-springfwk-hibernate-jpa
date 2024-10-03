@@ -17,6 +17,9 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
+import javax.sql.DataSource;
+import java.sql.DatabaseMetaData;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +41,9 @@ class CountryServiceIT {
     private Environment environment;
 
     @Autowired
+    private DataSource dataSource;
+
+    @Autowired
     private CountryService countryService;
 
     @DynamicPropertySource
@@ -48,6 +54,17 @@ class CountryServiceIT {
 
         registry.add("unused.jdbc.host", () -> postgresWorldDB.getHost());
         registry.add("unused.jdbc.port", () -> postgresWorldDB.getMappedPort(5432));
+    }
+
+    @Test
+    void databaseMetaData() throws SQLException {
+        DatabaseMetaData databaseMetaData = dataSource.getConnection().getMetaData();
+
+        int databaseMajorVersion = databaseMetaData.getDatabaseMajorVersion();
+        assertThat(databaseMajorVersion).isEqualTo(17);
+
+        String databaseProductName = databaseMetaData.getDatabaseProductName();
+        assertThat(databaseProductName).containsIgnoringCase("postgresql");
     }
 
     @Test
