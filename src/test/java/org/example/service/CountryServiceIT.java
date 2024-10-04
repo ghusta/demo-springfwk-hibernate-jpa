@@ -53,7 +53,7 @@ class CountryServiceIT {
         registry.add("jdbc.password", () -> postgresWorldDB.getPassword());
 
         registry.add("unused.jdbc.host", () -> postgresWorldDB.getHost());
-        registry.add("unused.jdbc.port", () -> postgresWorldDB.getMappedPort(5432));
+        registry.add("unused.jdbc.port", () -> postgresWorldDB.getMappedPort(PostgreSQLContainer.POSTGRESQL_PORT));
     }
 
     @Test
