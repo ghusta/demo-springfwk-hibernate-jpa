@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration(proxyBeanMethods = false)
 @ComponentScan(basePackages = {"org.example.controller"})
 @EnableWebMvc
-@Import(BackendConfig.class)
+@Import({BackendConfig.class, JacksonConfig.class})
 public class WebappConfig {
 
 }
