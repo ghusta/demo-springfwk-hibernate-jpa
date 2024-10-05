@@ -54,7 +54,8 @@ public class BackendConfig {
         dataSource.setJdbcUrl(propJdbcUrl);
         dataSource.setUsername(propJdbcUsername);
         dataSource.setPassword(propJdbcPassword);
-        // dataSource.setDriverClassName("org.postgresql.Driver");
+        // See: https://stackoverflow.com/questions/1911253/the-infamous-java-sql-sqlexception-no-suitable-driver-found
+        dataSource.setDriverClassName("org.postgresql.Driver");
         return dataSource;
     }
 
