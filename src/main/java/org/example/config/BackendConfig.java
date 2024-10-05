@@ -1,8 +1,9 @@
 package org.example.config;
 
 import com.zaxxer.hikari.HikariDataSource;
+import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.cfg.AvailableSettings;
-import org.hibernate.dialect.PostgreSQL10Dialect;
+import org.hibernate.dialect.PostgreSQLDialect;
 import org.hibernate.tool.schema.Action;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +21,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Optional;
 import java.util.Properties;
@@ -88,7 +88,7 @@ public class BackendConfig {
         entityManagerFactoryBean.setPackagesToScan("org.example.model");
 
         Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty(AvailableSettings.DIALECT, PostgreSQL10Dialect.class.getName());
+        hibernateProperties.setProperty(AvailableSettings.DIALECT, PostgreSQLDialect.class.getName());
         hibernateProperties.setProperty(AvailableSettings.HBM2DDL_AUTO, Action.NONE.getExternalHbm2ddlName());
         entityManagerFactoryBean.setJpaProperties(hibernateProperties);
 
