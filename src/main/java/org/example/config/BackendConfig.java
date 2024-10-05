@@ -3,7 +3,6 @@ package org.example.config;
 import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.cfg.AvailableSettings;
-import org.hibernate.dialect.PostgreSQLDialect;
 import org.hibernate.tool.schema.Action;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -88,7 +87,8 @@ public class BackendConfig {
         entityManagerFactoryBean.setPackagesToScan("org.example.model");
 
         Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty(AvailableSettings.DIALECT, PostgreSQLDialect.class.getName());
+        // org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+        // hibernateProperties.setProperty(AvailableSettings.DIALECT, PostgreSQLDialect.class.getName());
         hibernateProperties.setProperty(AvailableSettings.HBM2DDL_AUTO, Action.NONE.getExternalHbm2ddlName());
         entityManagerFactoryBean.setJpaProperties(hibernateProperties);
 
