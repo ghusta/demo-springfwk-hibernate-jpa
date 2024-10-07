@@ -10,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.SharedEntityManagerBean;
@@ -25,6 +26,8 @@ import java.util.Properties;
 @Configuration(proxyBeanMethods = false)
 @ComponentScan(basePackages = {"org.example.persistence", "org.example.service"})
 @EnableTransactionManagement
+@EnableJpaRepositories(basePackages = "org.example.persistence.data.jpa",
+        entityManagerFactoryRef = "entityManagerFactoryBean", transactionManagerRef = "txManager")
 @PropertySource(value = "classpath:application.properties", ignoreResourceNotFound = true)
 public class BackendConfig {
 

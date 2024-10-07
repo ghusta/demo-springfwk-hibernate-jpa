@@ -1,6 +1,7 @@
 package org.example.config;
 
 import org.example.model.Country;
+import org.example.service.CountryDataJpaService;
 import org.example.service.CountryService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
@@ -21,9 +22,14 @@ class BackendConfigTest {
 
     private static ApplicationContext ctx;
 
+    private static CountryService countryService;
+    private static CountryDataJpaService countryDataJpaService;
+
     @BeforeAll
     static void setUpGlobal() {
         ctx = new AnnotationConfigApplicationContext(BackendConfig.class);
+        countryService = ctx.getBean(CountryService.class);
+        countryDataJpaService = ctx.getBean(CountryDataJpaService.class);
     }
 
     @Test
@@ -44,7 +50,6 @@ class BackendConfigTest {
     @Test
     @Disabled("Needs local database -- see IT")
     void serviceRead() {
-        CountryService countryService = ctx.getBean(CountryService.class);
         List<Country> all = countryService.findAll();
         log.info("Nb countries = {}", all.size());
         assertThat(all).hasSizeGreaterThan(100);
@@ -52,8 +57,15 @@ class BackendConfigTest {
 
     @Test
     @Disabled("Needs local database -- see IT")
+    void serviceDataJpaRead() {
+        List<Country> all = countryDataJpaService.findAll();
+        log.info("Nb countries = {}", all.size());
+        assertThat(all).hasSizeGreaterThan(100);
+    }
+
+    @Test
+    @Disabled("Needs local database -- see IT")
     void serviceWrite() {
-        CountryService countryService = ctx.getBean(CountryService.class);
         Country newCountry = new Country();
         newCountry.setCode("MRS");
         newCountry.setCode2("M_");
