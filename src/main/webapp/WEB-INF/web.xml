@@ -4,7 +4,26 @@
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <!-- Spring DispatcherServlet -->
+    <!-- Configure ContextLoaderListener to use AnnotationConfigWebApplicationContext
+        instead of the default XmlWebApplicationContext -->
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </context-param>
+    <!-- Configuration locations must consist of one or more comma- or space-delimited
+        fully-qualified @Configuration classes. Fully-qualified packages may also be
+        specified for component-scanning -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>org.example.config.WebappConfig</param-value>
+    </context-param>
+
+    <!-- Bootstrap the root application context as usual using ContextLoaderListener -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- Spring MVC DispatcherServlet -->
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -15,7 +34,7 @@
         </init-param>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>com.example.config</param-value>
+            <param-value>org.example.config.WebappConfig</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -44,19 +63,5 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-    <!-- Context Loader Listener for Spring's root context -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <context-param>
-        <param-name>contextClass</param-name>
-        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
-    </context-param>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>org.example.config.WebappConfig</param-value>
-    </context-param>
 
 </web-app>
