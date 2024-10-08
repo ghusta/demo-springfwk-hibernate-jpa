@@ -4,24 +4,10 @@
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <!-- Configure ContextLoaderListener to use AnnotationConfigWebApplicationContext
-        instead of the default XmlWebApplicationContext -->
-    <context-param>
-        <param-name>contextClass</param-name>
-        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
-    </context-param>
-    <!-- Configuration locations must consist of one or more comma- or space-delimited
-        fully-qualified @Configuration classes. Fully-qualified packages may also be
-        specified for component-scanning -->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>org.example.config.WebappConfig</param-value>
-    </context-param>
-
-    <!-- Bootstrap the root application context as usual using ContextLoaderListener -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+    <!-- [OPTIONAL if DispatcherServlet] Bootstrap the root application context as usual using ContextLoaderListener -->
+    <!--    <listener>-->
+    <!--        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
+    <!--    </listener>-->
 
     <!-- Spring MVC DispatcherServlet -->
     <servlet>
