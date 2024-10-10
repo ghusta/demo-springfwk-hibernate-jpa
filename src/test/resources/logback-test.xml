@@ -15,6 +15,7 @@
     <!-- Enable DEBUG logging for Spring classes -->
     <logger name="org.springframework" level="INFO"/>
     <logger name="org.springframework.transaction" level="TRACE"/>
+    <logger name="org.hibernate" level="INFO"/>
     <logger name="org.example" level="DEBUG"/>
 
 </configuration>
