@@ -81,7 +81,7 @@ public class BackendConfig {
         entityManagerFactoryBean.setJpaProperties(hibernateProperties);
 
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-        jpaVendorAdapter.setShowSql(true);
+        // jpaVendorAdapter.setShowSql(true);
         entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
         return entityManagerFactoryBean;
     }
