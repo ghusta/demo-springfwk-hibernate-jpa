@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.SharedEntityManagerBean;
+import org.springframework.orm.jpa.vendor.AbstractJpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -80,7 +81,7 @@ public class BackendConfig {
         hibernateProperties.setProperty(AvailableSettings.HBM2DDL_AUTO, Action.NONE.getExternalHbm2ddlName());
         entityManagerFactoryBean.setJpaProperties(hibernateProperties);
 
-        HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+        AbstractJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         // jpaVendorAdapter.setShowSql(true);
         entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
         return entityManagerFactoryBean;
