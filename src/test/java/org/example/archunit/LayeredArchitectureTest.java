@@ -73,6 +73,8 @@ class LayeredArchitectureTest {
         ArchRule rule = classes()
                 .that().areAnnotatedWith(Entity.class)
                 .should(notBeFinal);
+        // Could also use this :
+        // .should().notHaveModifier(JavaModifier.FINAL);
 
         rule.check(importedClasses);
     }
