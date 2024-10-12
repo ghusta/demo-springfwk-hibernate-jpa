@@ -8,7 +8,7 @@ import com.tngtech.archunit.lang.ArchCondition;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.ConditionEvents;
 import com.tngtech.archunit.lang.SimpleConditionEvent;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -21,10 +21,10 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LayeredArchitectureTest {
 
-    private JavaClasses importedClasses;
+    private static JavaClasses importedClasses;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUpGlobal() {
         importedClasses = new ClassFileImporter().importPackages("org.example");
     }
 
