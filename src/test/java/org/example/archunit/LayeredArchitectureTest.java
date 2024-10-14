@@ -6,8 +6,6 @@ import com.tngtech.archunit.core.domain.JavaModifier;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.lang.ArchCondition;
 import com.tngtech.archunit.lang.ArchRule;
-import com.tngtech.archunit.lang.ConditionEvents;
-import com.tngtech.archunit.lang.SimpleConditionEvent;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -15,6 +13,9 @@ import org.junit.jupiter.api.Test;
 
 import javax.persistence.Entity;
 
+import static com.tngtech.archunit.base.DescribedPredicate.describe;
+import static com.tngtech.archunit.lang.conditions.ArchConditions.be;
+import static com.tngtech.archunit.lang.conditions.ArchConditions.not;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
@@ -46,27 +47,11 @@ class LayeredArchitectureTest {
         rule.check(importedClasses);
     }
 
-    static ArchCondition<JavaClass> beFinal = new ArchCondition<>("be final") {
-        @Override
-        public void check(JavaClass javaClass, ConditionEvents events) {
-            boolean isFinal = javaClass.getModifiers().contains(JavaModifier.FINAL);
-            if (!isFinal) {
-                String message = String.format("%s is not final", javaClass.getName());
-                events.add(SimpleConditionEvent.violated(javaClass, message));
-            }
-        }
-    };
+    static ArchCondition<JavaClass> beFinal = be(describe("final", javaClass ->
+            javaClass.getModifiers().contains(JavaModifier.FINAL))
+    );
 
-    static ArchCondition<JavaClass> notBeFinal = new ArchCondition<>("not be final") {
-        @Override
-        public void check(JavaClass javaClass, ConditionEvents events) {
-            boolean isFinal = javaClass.getModifiers().contains(JavaModifier.FINAL);
-            if (isFinal) {
-                String message = String.format("%s is final", javaClass.getName());
-                events.add(SimpleConditionEvent.violated(javaClass, message));
-            }
-        }
-    };
+    static ArchCondition<JavaClass> notBeFinal = not(beFinal);
 
     @Test
     void jpa_entities_should_not_be_final() {
