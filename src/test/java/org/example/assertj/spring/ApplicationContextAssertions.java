@@ -69,8 +69,10 @@ public class ApplicationContextAssertions extends AbstractAssert<ApplicationCont
     public ApplicationContextAssertions hasExactlyOneBeanOfType(Class<?> type) {
         isNotNull();
 
-        if (actual.getBeansOfType(type).size() != 1) {
-            failWithMessage("Expected ApplicationContext to contain exactly one bean of type <%s> but it does not.", type.getName());
+        int beansCount = actual.getBeansOfType(type).size();
+        if (beansCount != 1) {
+            failWithMessage("Expected ApplicationContext to contain exactly one bean of type <%s> but it does not (found %s).",
+                    type.getName(), beansCount);
         }
 
         return this;
