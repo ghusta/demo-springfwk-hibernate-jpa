@@ -31,6 +31,10 @@ public class ApplicationContextAssertions extends AbstractAssert<ApplicationCont
         return this;
     }
 
+    public ApplicationContextAssertions hasBeans(String... beanNames) {
+        return containsBeans(beanNames);
+    }
+
     public ApplicationContextAssertions containsBeans(String... beanNames) {
         isNotNull(); // Ensures that the ApplicationContext is not null
 
