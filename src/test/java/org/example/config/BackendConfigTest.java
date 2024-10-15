@@ -11,10 +11,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.example.assertj.spring.ApplicationContextAssertions.assertThat;
 
 class BackendConfigTest {
 
@@ -45,6 +48,12 @@ class BackendConfigTest {
                 .hasSizeGreaterThan(10)
                 .contains("entityManagerBean", "entityManagerFactoryBean", "dataSource", "txManager")
                 .contains("countryService", "countryRepositoryHibernate", "countryRepositoryJpa");
+
+        // Assertions directly on ApplicationContext
+        assertThat(ctx)
+                .hasBean("entityManagerBean")
+                .hasExactlyOneBeanOfType(EntityManagerFactory.class)
+                .hasBeansOfType(EntityManager.class);
     }
 
     @Test
