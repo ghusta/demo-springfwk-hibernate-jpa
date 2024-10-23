@@ -57,6 +57,13 @@ class BackendConfigTest {
     }
 
     @Test
+    void checkBeanDataSourceOfGivenType() {
+        // Assertions directly on ApplicationContext
+        assertThat(ctx)
+                .isBeanOfType("dataSource", javax.sql.DataSource.class);
+    }
+
+    @Test
     @Disabled("Needs local database -- see IT")
     void serviceRead() {
         List<Country> all = countryService.findAll();
