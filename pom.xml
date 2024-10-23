@@ -25,7 +25,7 @@
         <spring-data-jpa.version>2.7.18</spring-data-jpa.version>
         <hibernate.version>5.6.15.Final</hibernate.version>
         <jackson.version>2.16.2</jackson.version>
-        <testcontainers.version>1.20.2</testcontainers.version>
+        <testcontainers.version>1.20.3</testcontainers.version>
     </properties>
 
     <dependencyManagement>
