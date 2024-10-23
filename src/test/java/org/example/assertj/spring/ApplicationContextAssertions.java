@@ -47,6 +47,30 @@ public class ApplicationContextAssertions extends AbstractAssert<ApplicationCont
     }
 
     /**
+     * Expects that bean is of given type or assignable to it.
+     *
+     * @param beanName Bean name
+     * @param type     Expected type
+     */
+    public ApplicationContextAssertions isBeanOfType(String beanName, Class<?> type) {
+        isNotNull();
+        if (type == null) {
+            failWithMessage("Parameter type was null");
+            return this;
+        }
+
+        // first check the bean exists
+        containsBean(beanName);
+
+        Class<?> actualType = actual.getType(beanName);
+        if (actualType == null || !type.isAssignableFrom(actualType)) {
+            failWithMessage("Expected ApplicationContext to contain bean <%s> of type <%s> " +
+                    "but the actual type was <%s>.", beanName, type.getName(), (actualType != null ? actualType.getName() : "null"));
+        }
+        return this;
+    }
+
+    /**
      * Expects at least one bean of this type.
      *
      * @param type Expected type
