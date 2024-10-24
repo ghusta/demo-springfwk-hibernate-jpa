@@ -32,4 +32,8 @@ public class CountryService {
         return countryRepository.save(country);
     }
 
+    public void deleteById(String id) {
+        countryRepository.delete(id);
+    }
+
 }

@@ -111,4 +111,13 @@ class BackendConfigTest {
         assertThat(persistedEntity).isNotEmpty();
     }
 
+    @Test
+    @Disabled("Needs local database -- see IT")
+    void serviceRemove() {
+        countryService.deleteById("MRS");
+
+        Optional<Country> persistedEntity = countryService.findById("MRS");
+        assertThat(persistedEntity).isEmpty();
+    }
+
 }
