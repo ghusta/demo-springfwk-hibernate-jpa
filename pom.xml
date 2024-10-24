@@ -17,6 +17,8 @@
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+        <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <spring-framework.version>5.3.39</spring-framework.version>
