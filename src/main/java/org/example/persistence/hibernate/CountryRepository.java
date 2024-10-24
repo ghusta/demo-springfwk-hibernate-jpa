@@ -45,4 +45,9 @@ public class CountryRepository {
         return country;
     }
 
+    public void delete(String id) {
+        Session session = getSession();
+        findById(id).ifPresent(session::remove);
+    }
+
 }
