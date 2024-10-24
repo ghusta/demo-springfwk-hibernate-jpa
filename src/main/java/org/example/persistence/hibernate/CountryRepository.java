@@ -41,7 +41,7 @@ public class CountryRepository {
 
     public Country save(Country country) {
         Session session = getSession();
-        session.save(country);
+        session.persist(country);
         return country;
     }
 
