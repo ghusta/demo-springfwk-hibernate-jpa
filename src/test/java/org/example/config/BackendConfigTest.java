@@ -13,6 +13,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,6 +64,15 @@ class BackendConfigTest {
         // Assertions directly on ApplicationContext
         assertThat(ctx)
                 .isBeanOfType("dataSource", javax.sql.DataSource.class);
+    }
+
+    @Test
+    void checkDataSource_getConnection() throws SQLException {
+        DataSource ds = ctx.getBean(DataSource.class);
+        Connection cnx = ds.getConnection();
+        assertThat(cnx.isClosed()).isFalse();
+        assertThat(cnx.getCatalog()).isEqualTo("world-db");
+        assertThat(cnx.getSchema()).isEqualTo("public");
     }
 
     @Test
