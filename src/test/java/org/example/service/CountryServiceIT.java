@@ -65,6 +65,9 @@ class CountryServiceIT {
 
         String databaseProductName = databaseMetaData.getDatabaseProductName();
         assertThat(databaseProductName).containsIgnoringCase("postgresql");
+
+        String driverName = databaseMetaData.getDriverName();
+        assertThat(driverName).isEqualTo("PostgreSQL JDBC Driver");
     }
 
     @Test
