@@ -89,6 +89,16 @@ class LayeredArchitectureTest {
         rule.check(importedClasses);
     }
 
+    /**
+     * JPA Entities often need to be proxied, for lazy loading for example.
+     * As a consequence, they should not be declared final.
+     * <p>
+     * See :
+     *     <ul>
+     *         <li><a href="https://thorben-janssen.com/hibernate-proxies/">Hibernate Proxies</a></li>
+     *     </ul>
+     * </p>
+     */
     @Test
     void jpa_entities_should_not_be_final() {
         ArchRule rule = classes()
