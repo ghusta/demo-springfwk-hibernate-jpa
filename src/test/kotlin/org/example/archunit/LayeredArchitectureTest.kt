@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.DisplayNameGeneration
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores
 import org.junit.jupiter.api.Test
+import org.springframework.stereotype.Service
 
 /**
  * Check rules at § 2.1 here : [JPA 3.0 specs](https://jakarta.ee/specifications/persistence/3.0/jakarta-persistence-spec-3.0.pdf)
@@ -27,6 +28,16 @@ internal class LayeredArchitectureTest {
         val rule: ArchRule = noClasses()
             .that().resideInAPackage("..service..")
             .should().dependOnClassesThat().resideInAPackage("..controller..")
+
+        rule.check(importedClasses)
+    }
+
+    @Test
+    fun services_should_not_be_final() {
+        val rule: ArchRule = noClasses()
+            .that().resideInAPackage("..service..")
+            .and().areAnnotatedWith(Service::class.java)
+            .should(beFinal)
 
         rule.check(importedClasses)
     }
