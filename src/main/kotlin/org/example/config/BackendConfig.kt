@@ -31,21 +31,17 @@ import javax.sql.DataSource
     transactionManagerRef = "txManager"
 )
 @PropertySource(value = ["classpath:application.properties"], ignoreResourceNotFound = true)
-class BackendConfig(private val env: Environment) {
-
-    @Value("\${application.name:#{null}}")
-    private val appName: String? = null
-
-    // Using relaxed binding for property names
-    // can also read env var 'JDBC_URL'
-    @Value("\${jdbc.url:jdbc:postgresql://localhost:5432/world-db}")
-    private val propJdbcUrl: String? = null
-
-    @Value("\${jdbc.username:world}")
-    private val propJdbcUsername: String? = null
-
-    @Value("\${jdbc.password:world123}")
-    private val propJdbcPassword: String? = null
+class BackendConfig(
+    private val env: Environment,
+    @Value("\${application.name:#{null}}") val appName: String?,
+    /**
+     * Using relaxed binding for property names,
+     * can also read env var 'JDBC_URL'.
+     */
+    @Value("\${jdbc.url:jdbc:postgresql://localhost:5432/world-db}") val propJdbcUrl: String,
+    @Value("\${jdbc.username:world}") val propJdbcUsername: String,
+    @Value("\${jdbc.password:world123}") val propJdbcPassword: String
+) {
 
     @Bean
     fun dataSource(): DataSource {
