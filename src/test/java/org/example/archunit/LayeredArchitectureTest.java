@@ -3,6 +3,7 @@ package org.example.archunit;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.lang.ArchRule;
+import com.tngtech.archunit.lang.conditions.ArchConditions;
 import jakarta.persistence.Entity;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -10,7 +11,9 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Service;
 
+import static com.tngtech.archunit.lang.conditions.ArchConditions.not;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 import static org.example.archunit.JavaClassConditions.beFinal;
 import static org.example.archunit.JavaClassConditions.haveNoArgConstructor;
@@ -63,6 +66,22 @@ class LayeredArchitectureTest {
         ArchRule rule = classes()
                 .that().areAnnotatedWith(Entity.class)
                 .should().bePublic();
+
+        rule.check(importedClasses);
+    }
+
+    /**
+     * To avoid this error :
+     * <pre>
+     *     WARN [main] org.hibernate.metamodel.internal.EntityRepresentationStrategyPojoStandard.createProxyFactory HHH000305: Could not create proxy factory for:org.example.model.Country
+     *         org.hibernate.HibernateException: Getter methods of lazy classes cannot be final: org.example.model.Country#getCode2
+     * </pre>
+     */
+    @Test
+    void jpa_entities_getters_should_not_be_final() {
+        ArchRule rule = methods()
+                .that().areDeclaredInClassesThat().areAnnotatedWith(Entity.class)
+                .should(not(ArchConditions.beFinal()));
 
         rule.check(importedClasses);
     }
