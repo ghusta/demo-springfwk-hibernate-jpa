@@ -6,13 +6,15 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 
 /**
- * See:
+ * As opposed to what comes naturally here, using data classes as JPA entities is generally discouraged.
+ *
+ * Refs:
  * - https://www.baeldung.com/kotlin/jpa
  * - https://www.baeldung.com/kotlin/jpa#data-classes
  */
 @Entity
 @Table(name = "country")
-data class Country(
+open class Country(
     @Id
     val code: String,
 
