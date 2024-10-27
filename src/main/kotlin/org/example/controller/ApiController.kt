@@ -5,14 +5,15 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping(path = ["/api"])
+@RequestMapping("/api")
 class ApiController {
-    @GetMapping(path = ["version"])
+
+    @GetMapping("version")
     fun version(): Map<String, String> {
         return mapOf("version" to "1.2.3")
     }
 
-    @GetMapping(path = ["status"])
+    @GetMapping("status")
     fun status(): Map<String, String> {
         return mapOf("status" to "UP")
     }

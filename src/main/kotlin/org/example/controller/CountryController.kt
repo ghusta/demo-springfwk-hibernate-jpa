@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.server.ResponseStatusException
 
 @RestController
-@RequestMapping(path = ["/countries"])
+@RequestMapping("/countries")
 class CountryController(val countryService: CountryService) {
 
-    @GetMapping(path = [""])
+    @GetMapping("")
     fun findAll(): List<Country> {
-        return countryService.findAll() as List<Country>
+        return countryService.findAll()
     }
 
-    @GetMapping(path = ["{code}"])
+    @GetMapping("{code}")
     fun findByCode(@PathVariable("code") code: String): Country? {
         return countryService.findById(code) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
     }
