@@ -5,6 +5,8 @@ import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 
+/* See : https://www.baeldung.com/kotlin/jpa */
+
 @Entity
 @Table(name = "country")
 data class Country(

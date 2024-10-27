@@ -6,9 +6,12 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
+/**
+ * `open` not needed thanks to kotlin spring plugin.
+ */
 @Service
 @Transactional
-open class CountryDataJpaService(private val countryDataJpaRepository: CountryDataJpaRepository) {
+class CountryDataJpaService(private val countryDataJpaRepository: CountryDataJpaRepository) {
 
     @Transactional(readOnly = true)
     fun findById(code: String): Country? {

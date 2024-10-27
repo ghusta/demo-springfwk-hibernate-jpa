@@ -31,7 +31,7 @@ import javax.sql.DataSource
     transactionManagerRef = "txManager"
 )
 @PropertySource(value = ["classpath:application.properties"], ignoreResourceNotFound = true)
-class BackendConfig(val env: Environment) {
+class BackendConfig(private val env: Environment) {
 
     @Value("\${application.name:#{null}}")
     private val appName: String? = null

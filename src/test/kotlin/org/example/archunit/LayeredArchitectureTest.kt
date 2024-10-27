@@ -7,22 +7,21 @@ import com.tngtech.archunit.core.domain.JavaModifier
 import com.tngtech.archunit.core.importer.ClassFileImporter
 import com.tngtech.archunit.lang.ArchCondition
 import com.tngtech.archunit.lang.ArchRule
-import com.tngtech.archunit.lang.conditions.ArchConditions.be
-import com.tngtech.archunit.lang.conditions.ArchConditions.have
-import com.tngtech.archunit.lang.conditions.ArchConditions.not
+import com.tngtech.archunit.lang.conditions.ArchConditions.*
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses
 import jakarta.persistence.Entity
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.DisplayNameGeneration
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 /**
  * Check rules at § 2.1 here : [JPA 3.0 specs](https://jakarta.ee/specifications/persistence/3.0/jakarta-persistence-spec-3.0.pdf)
  */
 @DisplayNameGeneration(ReplaceUnderscores::class)
 internal class LayeredArchitectureTest {
+
     @Test
     fun services_should_not_depend_on_controllers() {
         val rule: ArchRule = noClasses()
