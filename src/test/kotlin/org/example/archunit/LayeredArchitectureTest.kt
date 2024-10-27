@@ -8,6 +8,7 @@ import com.tngtech.archunit.core.importer.ClassFileImporter
 import com.tngtech.archunit.lang.ArchCondition
 import com.tngtech.archunit.lang.ArchRule
 import com.tngtech.archunit.lang.conditions.ArchConditions.*
+import com.tngtech.archunit.lang.syntax.ArchRuleDefinition
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses
 import jakarta.persistence.Entity
@@ -68,6 +69,22 @@ internal class LayeredArchitectureTest {
 
         // Could also use this :
         // .should().notHaveModifier(JavaModifier.FINAL);
+        rule.check(importedClasses)
+    }
+
+    /**
+     * To avoid this error :
+     * <pre>
+     * WARN [main] org.hibernate.metamodel.internal.EntityRepresentationStrategyPojoStandard.createProxyFactory HHH000305: Could not create proxy factory for:org.example.model.Country
+     * org.hibernate.HibernateException: Getter methods of lazy classes cannot be final: org.example.model.Country#getCode2
+    </pre> *
+     */
+    @Test
+    fun jpa_entities_getters_should_not_be_final() {
+        val rule: ArchRule = ArchRuleDefinition.methods()
+            .that().areDeclaredInClassesThat().areAnnotatedWith(Entity::class.java)
+            .should(not(beFinal()))
+
         rule.check(importedClasses)
     }
 
