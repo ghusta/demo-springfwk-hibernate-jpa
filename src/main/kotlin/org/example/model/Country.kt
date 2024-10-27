@@ -16,34 +16,34 @@ import jakarta.persistence.Table
 @Table(name = "country")
 open class Country(
     @Id
-    val code: String,
+    open val code: String,
 
     @Column(nullable = false)
-    val code2: String,
+    open val code2: String,
 
     @Column(nullable = false)
-    val name: String,
+    open val name: String,
 
     @Column(nullable = false)
-    val continent: String,
+    open val continent: String,
 
     @Column(nullable = false)
-    val region: String,
+    open val region: String,
 
     @Column(nullable = false)
-    val population: Long,
+    open val population: Long,
 
     @Column(name = "life_expectancy")
-    val lifeExpectancy: Double? = null,
+    open val lifeExpectancy: Double? = null,
 
     @Column(name = "surface_area", nullable = false)
-    val surfaceArea: Double,
+    open val surfaceArea: Double,
 
     @Column(name = "government_form", nullable = false)
-    val governmentForm: String,
+    open val governmentForm: String,
 
     @Column(name = "local_name", nullable = false)
-    val localName: String
+    open val localName: String
 )
 
 
