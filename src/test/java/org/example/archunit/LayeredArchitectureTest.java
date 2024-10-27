@@ -44,6 +44,16 @@ class LayeredArchitectureTest {
         rule.check(importedClasses);
     }
 
+    /**
+     * Spring Services often need to be proxied, for transaction management for example.
+     * As a consequence, they should not be declared final.
+     * <p>
+     * See :
+     *     <ul>
+     *         <li><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html">Using @Transactional</a></li>
+     *     </ul>
+     * </p>
+     */
     @Test
     void services_should_not_be_final() {
         ArchRule rule = noClasses()
