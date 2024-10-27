@@ -60,7 +60,7 @@ class BackendConfig(private val env: Environment) {
 
     @Bean
     fun txManager(emf: EntityManagerFactory): PlatformTransactionManager {
-        val jpaTransactionManager: JpaTransactionManager = JpaTransactionManager(emf)
+        val jpaTransactionManager = JpaTransactionManager(emf)
         // jpaTransactionManager.setJpaDialect(new HibernateJpaDialect());
         return jpaTransactionManager
     }
@@ -71,7 +71,7 @@ class BackendConfig(private val env: Environment) {
         entityManagerFactoryBean.dataSource = dataSource
         entityManagerFactoryBean.setPackagesToScan("org.example.model")
 
-        val hibernateProperties: Properties = Properties()
+        val hibernateProperties = Properties()
         // org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
         // hibernateProperties.setProperty(AvailableSettings.DIALECT, PostgreSQLDialect.class.getName());
         hibernateProperties.setProperty(AvailableSettings.HBM2DDL_AUTO, Action.NONE.externalHbm2ddlName)
@@ -85,7 +85,7 @@ class BackendConfig(private val env: Environment) {
 
     @Bean
     fun entityManagerBean(emf: EntityManagerFactory): SharedEntityManagerBean {
-        val sharedEntityManagerBean: SharedEntityManagerBean = SharedEntityManagerBean()
+        val sharedEntityManagerBean = SharedEntityManagerBean()
         sharedEntityManagerBean.entityManagerFactory = emf
         return sharedEntityManagerBean
     }

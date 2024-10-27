@@ -10,7 +10,7 @@ class JacksonConfig {
 
     @Bean
     fun jsonConverter(): MappingJackson2HttpMessageConverter {
-        val objectMapper: ObjectMapper = ObjectMapper()
+        val objectMapper = ObjectMapper()
         // Customize objectMapper as needed
         return MappingJackson2HttpMessageConverter(objectMapper)
     }
