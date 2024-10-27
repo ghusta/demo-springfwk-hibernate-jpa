@@ -11,11 +11,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.Entity;
 
 import static com.tngtech.archunit.base.DescribedPredicate.describe;
-import static com.tngtech.archunit.lang.conditions.ArchConditions.*;
+import static com.tngtech.archunit.lang.conditions.ArchConditions.be;
+import static com.tngtech.archunit.lang.conditions.ArchConditions.have;
+import static com.tngtech.archunit.lang.conditions.ArchConditions.not;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
@@ -37,6 +40,16 @@ class LayeredArchitectureTest {
         ArchRule rule = noClasses()
                 .that().resideInAPackage("..service..")
                 .should().dependOnClassesThat().resideInAPackage("..controller..");
+
+        rule.check(importedClasses);
+    }
+
+    @Test
+    void services_should_not_be_final() {
+        ArchRule rule = noClasses()
+                .that().resideInAPackage("..service..")
+                .and().areAnnotatedWith(Service.class)
+                .should(beFinal);
 
         rule.check(importedClasses);
     }
