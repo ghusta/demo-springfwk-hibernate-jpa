@@ -81,6 +81,8 @@ class LayeredArchitectureTest {
     void jpa_entities_getters_should_not_be_final() {
         ArchRule rule = methods()
                 .that().areDeclaredInClassesThat().areAnnotatedWith(Entity.class)
+                .and().haveNameMatching("get[A-Z].*")  // Matches methods starting with "get"
+                .or().haveNameMatching("is[A-Z].*")    // Matches methods starting with "is" (for booleans)
                 .should(not(ArchConditions.beFinal()));
 
         rule.check(importedClasses);
