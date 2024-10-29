@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.config.BackendConfig;
+import org.example.model.City;
 import org.example.model.Country;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -46,6 +47,9 @@ class CountryServiceIT {
     @Autowired
     private CountryService countryService;
 
+    @Autowired
+    private CityService cityService;
+
     @DynamicPropertySource
     static void jdbcProperties(DynamicPropertyRegistry registry) {
         registry.add("jdbc.url", () -> postgresWorldDB.getJdbcUrl());
@@ -85,6 +89,17 @@ class CountryServiceIT {
         assertThat(byId.get())
                 .extracting(Country::getName)
                 .isEqualTo("France");
+    }
+
+
+    @Test
+    void serviceCapitalOfFrance() {
+        Optional<City> city = cityService.findCapital("FRA");
+        assertThat(city)
+                .isNotEmpty();
+        assertThat(city.get())
+                .extracting(City::getName)
+                .isEqualTo("Paris");
     }
 
     @Test
