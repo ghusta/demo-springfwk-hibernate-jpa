@@ -24,6 +24,7 @@
         <spring-data-jpa.version>3.3.5</spring-data-jpa.version>
         <hibernate.version>6.6.1.Final</hibernate.version>
         <jackson.version>2.16.2</jackson.version>
+        <mapstruct.version>1.6.2</mapstruct.version>
         <testcontainers.version>1.20.3</testcontainers.version>
     </properties>
 
@@ -96,13 +97,13 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>1.6.2</version>
+            <version>${mapstruct.version}</version>
         </dependency>
         <!-- MapStruct annotation processor (optional) -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
-            <version>1.6.2</version>
+            <version>${mapstruct.version}</version>
             <scope>provided</scope>
         </dependency>
 
