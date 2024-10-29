@@ -25,7 +25,7 @@ import java.util.Optional;
 import java.util.Properties;
 
 @Configuration(proxyBeanMethods = false)
-@ComponentScan(basePackages = {"org.example.persistence", "org.example.service"})
+@ComponentScan(basePackages = {"org.example.persistence", "org.example.service", "org.example.mapper"})
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "org.example.persistence.data.jpa",
         entityManagerFactoryRef = "entityManagerFactoryBean", transactionManagerRef = "txManager")
