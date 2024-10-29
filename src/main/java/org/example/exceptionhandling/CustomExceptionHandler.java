@@ -1,6 +1,7 @@
 package org.example.exceptionhandling;
 
 import org.example.exceptions.ResourceNotFoundException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,8 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                 HttpStatus.NOT_FOUND,
                 (ex.getMessage() == null ? "Resource not found" : ex.getMessage()));
 
-        return new ResponseEntity<>(problemDetail, HttpStatus.NOT_FOUND);
+//        return new ResponseEntity<>(problemDetail, HttpStatus.NOT_FOUND);
+        return handleExceptionInternal(ex, problemDetail, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
 }
