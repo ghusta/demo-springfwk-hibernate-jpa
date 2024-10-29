@@ -20,7 +20,12 @@ import static org.example.archunit.JavaClassConditions.haveNoArgConstructor;
 import static org.example.archunit.JavaClassConditions.notBeFinal;
 
 /**
- * Check rules at § 2.1 here : <a href="https://jakarta.ee/specifications/persistence/3.0/jakarta-persistence-spec-3.0.pdf">JPA 3.0 specs</a>
+ * Check rules at § 2.1 here :
+ * <ul>
+ *     <li><a href="https://jakarta.ee/specifications/persistence/3.0/jakarta-persistence-spec-3.0.pdf">Jakarta Persistence 3.0 specs</a></li>
+ *     <li><a href="https://jakarta.ee/specifications/persistence/3.1/jakarta-persistence-spec-3.1.pdf">Jakarta Persistence 3.1 specs</a></li>
+ *     <li><a href="https://jakarta.ee/specifications/persistence/3.2/jakarta-persistence-spec-3.2.pdf">Jakarta Persistence 3.2 specs</a></li>
+ * </ul>
  */
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LayeredArchitectureTest {
