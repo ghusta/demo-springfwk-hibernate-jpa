@@ -21,7 +21,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
                 HttpStatus.NOT_FOUND,
-                ex.getMessage());
+                (ex.getMessage() == null ? "Resource not found" : ex.getMessage()));
 
         return new ResponseEntity<>(problemDetail, HttpStatus.NOT_FOUND);
     }

@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.dto.CityDTO;
 import org.example.dto.CountryDTO;
+import org.example.exceptions.ResourceNotFoundException;
 import org.example.mapper.CityMapper;
 import org.example.mapper.CountryMapper;
 import org.example.model.Country;
@@ -42,7 +43,7 @@ public class CountryController {
     public CountryDTO findByCode(@PathVariable("code") String code) {
         return countryService.findById(code)
                 .map(countryMapper::countryToCountryDTO)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResourceNotFoundException("Country not found"));
     }
 
     @GetMapping(path = "{code}/capital")
