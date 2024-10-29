@@ -19,7 +19,7 @@ class CountryRepository {
     fun findAll(): List<Country> {
         val query: TypedQuery<Country> = em
             .createQuery("from Country ", Country::class.java)
-        return query.resultList.toList() as List<Country>
+        return query.resultList.toList()
     }
 
     fun save(country: Country): Country {

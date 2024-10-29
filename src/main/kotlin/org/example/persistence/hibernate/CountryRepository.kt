@@ -29,7 +29,6 @@ class CountryRepository {
         return session.get(Country::class.java, code)
     }
 
-    @Suppress("UNCHECKED_CAST")
     fun findAll(): List<Country> {
         val query: Query<Country> = getSession()
             .createQuery("from Country ", Country::class.java)
