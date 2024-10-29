@@ -77,7 +77,7 @@ internal class LayeredArchitectureTest {
      * <pre>
      * WARN [main] org.hibernate.metamodel.internal.EntityRepresentationStrategyPojoStandard.createProxyFactory HHH000305: Could not create proxy factory for:org.example.model.Country
      * org.hibernate.HibernateException: Getter methods of lazy classes cannot be final: org.example.model.Country#getCode2
-    </pre> *
+     * </pre>
      */
     @Test
     fun jpa_entities_getters_should_not_be_final() {
