@@ -1,8 +1,9 @@
 package org.example.controller;
 
+import org.example.dto.CityDTO;
 import org.example.dto.CountryDTO;
+import org.example.mapper.CityMapper;
 import org.example.mapper.CountryMapper;
-import org.example.model.City;
 import org.example.model.Country;
 import org.example.service.CityService;
 import org.example.service.CountryService;
@@ -22,11 +23,14 @@ public class CountryController {
     private final CountryService countryService;
     private final CityService cityService;
     private final CountryMapper countryMapper;
+    private final CityMapper cityMapper;
 
-    public CountryController(CountryService countryService, CityService cityService, CountryMapper countryMapper) {
+    public CountryController(CountryService countryService, CityService cityService,
+                             CountryMapper countryMapper, CityMapper cityMapper) {
         this.countryService = countryService;
         this.cityService = cityService;
         this.countryMapper = countryMapper;
+        this.cityMapper = cityMapper;
     }
 
     @GetMapping(path = "")
@@ -42,9 +46,9 @@ public class CountryController {
     }
 
     @GetMapping(path = "{code}/capital")
-    public String findCapital(@PathVariable("code") String code) {
+    public CityDTO findCapital(@PathVariable("code") String code) {
         return cityService.findCapital(code)
-                .map(City::getName)
+                .map(cityMapper::cityToCityDTO)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
