@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.Optional;
+
 /**
  * Will return errors following RFC 9457 problem detail.
  */
@@ -22,7 +24,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
                 HttpStatus.NOT_FOUND,
-                (ex.getMessage() == null ? "Resource not found" : ex.getMessage()));
+                Optional.of(ex.getMessage()).orElse("Resource not found"));
 
 //        return new ResponseEntity<>(problemDetail, HttpStatus.NOT_FOUND);
         return handleExceptionInternal(ex, problemDetail, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
