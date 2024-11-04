@@ -20,8 +20,8 @@
         <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <spring-framework.version>6.1.15</spring-framework.version>
-        <spring-data-jpa.version>3.3.6</spring-data-jpa.version>
+        <spring-framework.version>6.2.0-RC3</spring-framework.version>
+        <spring-data-jpa.version>3.4.0-RC1</spring-data-jpa.version>
         <hibernate.version>6.6.2.Final</hibernate.version>
         <jackson.version>2.16.2</jackson.version>
         <mapstruct.version>1.6.3</mapstruct.version>
@@ -242,4 +242,15 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>
