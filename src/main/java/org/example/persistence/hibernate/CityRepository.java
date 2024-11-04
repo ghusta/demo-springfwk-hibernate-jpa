@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository("cityRepositoryHibernate")
@@ -22,6 +23,13 @@ public class CityRepository {
     public Optional<City> findById(String id) {
         Session session = getSession();
         return Optional.ofNullable(session.get(City.class, id));
+    }
+
+    public List<City> findByCountry(String countryCode) {
+        Query<City> query = getSession()
+                .createQuery("from City where country.code = :countryCode", City.class);
+        query.setParameter("countryCode", countryCode);
+        return query.list();
     }
 
     public Optional<City> findCapital(String countryCode) {

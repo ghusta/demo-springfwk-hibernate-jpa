@@ -46,6 +46,17 @@ public class CountryController {
                 .orElseThrow(() -> new ResourceNotFoundException("Country not found")); // custom exception
     }
 
+    @GetMapping(path = "{code}/cities")
+    public List<CityDTO> findCities(@PathVariable("code") String code) {
+        countryService.findById(code)
+                .orElseThrow(() -> new ResourceNotFoundException("Country not found"));
+
+        return cityService.findByCountry(code)
+                .stream()
+                .map(cityMapper::cityToCityDTO)
+                .toList();
+    }
+
     @GetMapping(path = "{code}/capital")
     public CityDTO findCapital(@PathVariable("code") String code) {
         return cityService.findCapital(code)

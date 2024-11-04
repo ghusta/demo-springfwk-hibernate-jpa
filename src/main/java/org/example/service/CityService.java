@@ -5,6 +5,7 @@ import org.example.persistence.hibernate.CityRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,8 +19,13 @@ public class CityService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<City> findById(String code) {
-        return cityRepository.findById(code);
+    public Optional<City> findById(String id) {
+        return cityRepository.findById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<City> findByCountry(String code) {
+        return cityRepository.findByCountry(code);
     }
 
     @Transactional(readOnly = true)
