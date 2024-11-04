@@ -43,14 +43,14 @@ public class CountryController {
     public CountryDTO findByCode(@PathVariable("code") String code) {
         return countryService.findById(code)
                 .map(countryMapper::countryToCountryDTO)
-                .orElseThrow(() -> new ResourceNotFoundException("Country not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Country not found")); // custom exception
     }
 
     @GetMapping(path = "{code}/capital")
     public CityDTO findCapital(@PathVariable("code") String code) {
         return cityService.findCapital(code)
                 .map(cityMapper::cityToCityDTO)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)); // spring fwk exception
     }
 
 }
