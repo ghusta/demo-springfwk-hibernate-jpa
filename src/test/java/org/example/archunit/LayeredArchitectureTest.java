@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Service;
 
+import static com.tngtech.archunit.core.importer.ImportOption.Predefined.DO_NOT_INCLUDE_TESTS;
 import static com.tngtech.archunit.lang.conditions.ArchConditions.not;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
@@ -34,7 +35,9 @@ class LayeredArchitectureTest {
 
     @BeforeAll
     static void setUpGlobal() {
-        importedClasses = new ClassFileImporter().importPackages("org.example");
+        importedClasses = new ClassFileImporter()
+                .withImportOption(DO_NOT_INCLUDE_TESTS)
+                .importPackages("org.example");
     }
 
     @Test
