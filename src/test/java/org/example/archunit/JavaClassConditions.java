@@ -4,19 +4,24 @@ import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.core.domain.JavaConstructor;
 import com.tngtech.archunit.core.domain.JavaModifier;
 import com.tngtech.archunit.lang.ArchCondition;
+import com.tngtech.archunit.lang.conditions.ArchConditions;
 
 import static com.tngtech.archunit.base.DescribedPredicate.describe;
-import static com.tngtech.archunit.lang.conditions.ArchConditions.be;
 import static com.tngtech.archunit.lang.conditions.ArchConditions.have;
-import static com.tngtech.archunit.lang.conditions.ArchConditions.not;
 
 public class JavaClassConditions {
 
-    static ArchCondition<JavaClass> beFinal = be(describe("final", javaClass ->
-            javaClass.getModifiers().contains(JavaModifier.FINAL))
-    );
+    /**
+     * @deprecated Use {@link ArchConditions#beFinal()}
+     */
+    @Deprecated
+    static ArchCondition<JavaClass> beFinal = ArchConditions.beFinal();
 
-    static ArchCondition<JavaClass> notBeFinal = not(beFinal);
+    /**
+     * @deprecated Use {@link ArchConditions#notBeFinal()}
+     */
+    @Deprecated
+    static ArchCondition<JavaClass> notBeFinal = ArchConditions.notBeFinal();
 
     static ArchCondition<JavaClass> haveNoArgConstructor = have(describe("no arg constructor public or protected", javaClass -> {
         JavaConstructor noArgConstructor;
