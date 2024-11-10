@@ -12,13 +12,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Service;
 
 import static com.tngtech.archunit.core.importer.ImportOption.Predefined.DO_NOT_INCLUDE_TESTS;
-import static com.tngtech.archunit.lang.conditions.ArchConditions.not;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
-import static org.example.archunit.JavaClassConditions.beFinal;
 import static org.example.archunit.JavaClassConditions.haveNoArgConstructor;
-import static org.example.archunit.JavaClassConditions.notBeFinal;
 
 /**
  * Check rules at § 2.1 here :
@@ -64,7 +61,7 @@ class LayeredArchitectureTest {
         ArchRule rule = noClasses()
                 .that().resideInAPackage("..service..")
                 .and().areAnnotatedWith(Service.class)
-                .should(beFinal);
+                .should(ArchConditions.beFinal());
 
         rule.check(importedClasses);
     }
@@ -91,7 +88,7 @@ class LayeredArchitectureTest {
                 .that().areDeclaredInClassesThat().areAnnotatedWith(Entity.class)
                 .and().haveNameMatching("get[A-Z].*")  // Matches methods starting with "get"
                 .or().haveNameMatching("is[A-Z].*")    // Matches methods starting with "is" (for booleans)
-                .should(not(ArchConditions.beFinal()));
+                .should(ArchConditions.notBeFinal());
 
         rule.check(importedClasses);
     }
@@ -119,7 +116,7 @@ class LayeredArchitectureTest {
     void jpa_entities_should_not_be_final() {
         ArchRule rule = classes()
                 .that().areAnnotatedWith(Entity.class)
-                .should(notBeFinal);
+                .should(ArchConditions.notBeFinal());
         // Could also use this :
         // .should().notHaveModifier(JavaModifier.FINAL);
 
