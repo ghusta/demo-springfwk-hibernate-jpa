@@ -1,24 +1,30 @@
 package org.example.persistence.hibernate;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceUnit;
 import org.example.model.Country;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
 @Repository("countryRepositoryHibernate")
 public class CountryRepository {
 
+    @PersistenceUnit
+    private EntityManagerFactory emf;
+
     @PersistenceContext
     private EntityManager em;
 
-//    private SessionFactory getSessionFactory() {
-//        return emf.unwrap(SessionFactory.class);
-//    }
+    private SessionFactory getSessionFactory() {
+        return emf.unwrap(SessionFactory.class);
+    }
 
 //    private EntityManager createEntityManager() {
 //        return emf.createEntityManager();
