@@ -7,6 +7,7 @@ import jakarta.persistence.PersistenceUnit;
 import org.example.model.Country;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.StatelessSession;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
@@ -32,6 +33,10 @@ public class CountryRepository {
 
     private Session getSession() {
         return em.unwrap(Session.class);
+    }
+
+    private StatelessSession getStatelessSession() {
+        return getSessionFactory().openStatelessSession();
     }
 
     public Optional<Country> findById(String code) {
