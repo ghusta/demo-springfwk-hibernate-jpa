@@ -53,7 +53,7 @@ public class BackendConfig {
     }
 
     /**
-     * Needed to resolve ${} placeholders in {@link Value @Value} annotations or through {@link Environment}.
+     * Needed to resolve ${...} placeholders in {@link Value @Value} annotations or through {@link Environment}.
      *
      * @see PropertySource
      */
