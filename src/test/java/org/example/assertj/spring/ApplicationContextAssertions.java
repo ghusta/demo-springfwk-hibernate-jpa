@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
  */
 public class ApplicationContextAssertions extends AbstractAssert<ApplicationContextAssertions, ApplicationContext> {
 
-    public ApplicationContextAssertions(ApplicationContext actual) {
+    protected ApplicationContextAssertions(ApplicationContext actual) {
         super(actual, ApplicationContextAssertions.class);
     }
 
