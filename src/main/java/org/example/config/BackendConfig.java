@@ -80,6 +80,9 @@ public class BackendConfig {
         return jpaTransactionManager;
     }
 
+    /**
+     * May be injected later with {@link jakarta.persistence.PersistenceUnit @PersistenceUnit}.
+     */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -98,6 +101,9 @@ public class BackendConfig {
         return entityManagerFactoryBean;
     }
 
+    /**
+     * May be injected later with {@link jakarta.persistence.PersistenceContext @PersistenceContext}.
+     */
     @Bean
     public SharedEntityManagerBean entityManagerBean(EntityManagerFactory emf) {
         SharedEntityManagerBean sharedEntityManagerBean = new SharedEntityManagerBean();
