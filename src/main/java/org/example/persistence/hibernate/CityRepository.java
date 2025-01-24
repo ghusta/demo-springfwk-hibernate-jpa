@@ -22,7 +22,7 @@ public class CityRepository {
 
     public Optional<City> findById(String id) {
         Session session = getSession();
-        return Optional.ofNullable(session.get(City.class, id));
+        return Optional.ofNullable(session.find(City.class, id));
     }
 
     public List<City> findByCountry(String countryCode) {

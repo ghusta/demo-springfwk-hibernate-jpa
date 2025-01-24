@@ -41,7 +41,7 @@ public class CountryRepository {
 
     public Optional<Country> findById(String code) {
         Session session = getSession();
-        return Optional.ofNullable(session.get(Country.class, code));
+        return Optional.ofNullable(session.find(Country.class, code));
     }
 
     public List<Country> findAll() {
