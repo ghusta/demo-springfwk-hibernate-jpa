@@ -20,9 +20,9 @@
         <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <spring-framework.version>6.2.10</spring-framework.version>
-        <spring-data.version>2024.1.9</spring-data.version>
-        <hibernate.version>6.6.28.Final</hibernate.version>
+        <spring-framework.version>7.0.0-M1</spring-framework.version>
+        <spring-data.version>2024.1.7</spring-data.version>
+        <hibernate.version>7.0.0.Beta3</hibernate.version>
         <jackson.version>2.20.0</jackson.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <testcontainers.version>1.21.3</testcontainers.version>
@@ -98,7 +98,7 @@
         </dependency>
         <dependency>
             <groupId>org.hibernate.orm</groupId>
-            <artifactId>hibernate-jpamodelgen</artifactId>
+            <artifactId>hibernate-processor</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
 
