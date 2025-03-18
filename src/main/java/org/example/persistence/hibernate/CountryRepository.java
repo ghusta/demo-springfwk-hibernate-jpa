@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceUnit;
+import org.example.dto.SimpleCountryDTO;
 import org.example.model.Country;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -47,6 +48,14 @@ public class CountryRepository {
     public List<Country> findAll() {
         Query<Country> query = getSession()
                 .createQuery("from Country ", Country.class);
+        return query.getResultList();
+    }
+
+    public List<SimpleCountryDTO> findAllDTO() {
+        Query<SimpleCountryDTO> query = getSession()
+                .createQuery("select code, code2, name from Country ", Country.class)
+                .setTupleTransformer((tuple, aliases) ->
+                        new SimpleCountryDTO((String) tuple[0], (String) tuple[1], (String) tuple[2]));
         return query.getResultList();
     }
 
