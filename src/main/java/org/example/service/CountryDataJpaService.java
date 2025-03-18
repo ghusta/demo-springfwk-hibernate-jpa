@@ -32,4 +32,8 @@ public class CountryDataJpaService {
         return countryDataJpaRepository.save(country);
     }
 
+    public List<Country> findAllByName(String name) {
+        return countryDataJpaRepository.findAllByName(name);
+    }
+
 }
