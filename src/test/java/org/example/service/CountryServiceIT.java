@@ -14,6 +14,7 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.images.PullPolicy;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
@@ -34,6 +35,7 @@ class CountryServiceIT {
     @Container
     static PostgreSQLContainer<?> postgresWorldDB = new PostgreSQLContainer<>(
             DockerImageName.parse("ghusta/postgres-world-db:2.12").asCompatibleSubstituteFor("postgres"))
+            .withImagePullPolicy(PullPolicy.alwaysPull())
             .withDatabaseName("world-db")
             .withUsername("world")
             .withPassword("world123");
