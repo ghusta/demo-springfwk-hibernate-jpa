@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.StatelessSession;
 import org.hibernate.query.Query;
+import org.hibernate.type.StandardBasicTypes;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -72,6 +73,18 @@ public class CountryRepository {
     public void delete(String id) {
         Session session = getSession();
         findById(id).ifPresent(session::remove);
+    }
+
+    /**
+     * Using {@link StandardBasicTypes} when possible.
+     */
+    public List<Object[]> fetchColumnWithScalarUsingStandardBasicTypes() {
+        return getSession().createNativeQuery("SELECT * FROM Student student")
+                .addScalar("studentId", StandardBasicTypes.LONG)
+                .addScalar("name", StandardBasicTypes.STRING)
+                .addScalar("age", StandardBasicTypes.INTEGER)
+                .addScalar("dob", StandardBasicTypes.LOCAL_DATE)
+                .list();
     }
 
 }
