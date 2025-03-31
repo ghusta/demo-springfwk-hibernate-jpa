@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class CityService {
 
     private final CityRepository cityRepository;
@@ -19,7 +19,7 @@ public class CityService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<City> findById(String id) {
+    public Optional<City> findById(Integer id) {
         return cityRepository.findById(id);
     }
 
@@ -33,4 +33,12 @@ public class CityService {
         return cityRepository.findCapital(countryCode);
     }
 
+    @Transactional
+    public City save(City city) {
+        return cityRepository.save(city);
+    }
+
+    public long count() {
+        return cityRepository.count();
+    }
 }

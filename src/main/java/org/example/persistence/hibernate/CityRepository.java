@@ -20,7 +20,7 @@ public class CityRepository {
         return em.unwrap(Session.class);
     }
 
-    public Optional<City> findById(String id) {
+    public Optional<City> findById(Integer id) {
         Session session = getSession();
         return Optional.ofNullable(session.find(City.class, id));
     }
@@ -37,6 +37,18 @@ public class CityRepository {
                 .createQuery("select c.capital from Country c where c.code = :countryCode", City.class);
         query.setParameter("countryCode", countryCode);
         return query.uniqueResultOptional();
+    }
+
+    public long count() {
+        return getSession()
+                .createQuery("select count(c) from City c", Long.class)
+                .getSingleResult();
+    }
+
+    public City save(City city) {
+        Session session = getSession();
+        session.persist(city);
+        return city;
     }
 
 }

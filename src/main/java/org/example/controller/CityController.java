@@ -21,7 +21,7 @@ public class CityController {
 
     @GetMapping(path = "{id}")
     public String findById(@PathVariable("id") String id) {
-        return cityService.findById(id)
+        return cityService.findById(Integer.valueOf(id))
                 .map(City::getName)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
