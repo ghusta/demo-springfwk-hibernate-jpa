@@ -40,6 +40,10 @@ public class CountryRepository {
         return getSessionFactory().openStatelessSession();
     }
 
+    public boolean isManaged(Object entity) {
+        return em.contains(entity);
+    }
+
     public Optional<Country> findById(String code) {
         Session session = getSession();
         return Optional.ofNullable(session.find(Country.class, code));
