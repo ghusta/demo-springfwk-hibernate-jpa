@@ -20,7 +20,7 @@
         <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <spring-framework.version>6.2.7</spring-framework.version>
+        <spring-framework.version>6.2.8</spring-framework.version>
         <spring-data.version>2024.1.6</spring-data.version>
         <hibernate.version>6.6.17.Final</hibernate.version>
         <jackson.version>2.19.0</jackson.version>
