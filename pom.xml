@@ -194,7 +194,7 @@
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit-junit5</artifactId>
-            <version>1.4.0</version>
+            <version>1.4.1</version>
             <scope>test</scope>
         </dependency>
         <!-- See : https://youtu.be/sGmhaizFcEA?si=8O0J2ljiXIhNKJ3F -->
