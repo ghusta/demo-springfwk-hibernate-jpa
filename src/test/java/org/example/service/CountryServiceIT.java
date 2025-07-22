@@ -32,6 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CountryServiceIT {
 
     private static final Logger log = LoggerFactory.getLogger(CountryServiceIT.class);
+
     @Container
     static PostgreSQLContainer<?> postgresWorldDB = new PostgreSQLContainer<>(
             DockerImageName.parse("ghusta/postgres-world-db:2.12").asCompatibleSubstituteFor("postgres"))

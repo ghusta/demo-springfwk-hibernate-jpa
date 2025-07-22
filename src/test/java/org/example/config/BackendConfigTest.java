@@ -49,12 +49,11 @@ class BackendConfigTest {
         String[] beanDefinitionNames = ctx.getBeanDefinitionNames();
         assertThat(beanDefinitionNames)
                 .hasSizeGreaterThan(10)
-                .contains("entityManagerBean", "entityManagerFactoryBean", "dataSource", "txManager")
+                .contains("entityManagerFactoryBean", "dataSource", "txManager")
                 .contains("countryService", "countryRepositoryHibernate", "countryRepositoryJpa");
 
         // Assertions directly on ApplicationContext
         assertThat(ctx)
-                .hasBean("entityManagerBean")
                 .hasExactlyOneBeanOfType(EntityManagerFactory.class)
                 .hasBeansOfType(EntityManager.class);
     }

@@ -1,7 +1,6 @@
 package org.example.service;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.example.config.BackendConfig;
 import org.example.model.City;
 import org.example.model.Country;
@@ -20,7 +19,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 import javax.sql.DataSource;
-
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,7 +29,7 @@ class CityServiceIT {
 
     private static final Logger log = LoggerFactory.getLogger(CityServiceIT.class);
 
-    @PersistenceContext
+    @Autowired
     private EntityManager em;
 
     @Container

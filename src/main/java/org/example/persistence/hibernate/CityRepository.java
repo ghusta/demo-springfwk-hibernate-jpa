@@ -1,10 +1,10 @@
 package org.example.persistence.hibernate;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.example.model.City;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository("cityRepositoryHibernate")
 public class CityRepository {
 
-    @PersistenceContext
+    @Autowired
     private EntityManager em;
 
     private Session getSession() {

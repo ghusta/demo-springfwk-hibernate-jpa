@@ -14,7 +14,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.support.SharedEntityManagerBean;
 import org.springframework.orm.jpa.vendor.AbstractJpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -101,14 +100,17 @@ public class BackendConfig {
         return entityManagerFactoryBean;
     }
 
-    /**
-     * May be injected later with {@link jakarta.persistence.PersistenceContext @PersistenceContext}.
-     */
-    @Bean
-    public SharedEntityManagerBean entityManagerBean(EntityManagerFactory emf) {
-        SharedEntityManagerBean sharedEntityManagerBean = new SharedEntityManagerBean();
-        sharedEntityManagerBean.setEntityManagerFactory(emf);
-        return sharedEntityManagerBean;
-    }
+    // Since Spring FWK 7.0, shared EntityManager already exposed by AbstractEntityManagerFactoryBean
+    // See details: https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-7.0-Release-Notes#jpa-32-and-hibernate-orm-70
+
+//    /**
+//     * May be injected later with {@link jakarta.persistence.PersistenceContext @PersistenceContext}.
+//     */
+//    @Bean
+//    public SharedEntityManagerBean entityManagerBean(EntityManagerFactory emf) {
+//        SharedEntityManagerBean sharedEntityManagerBean = new SharedEntityManagerBean();
+//        sharedEntityManagerBean.setEntityManagerFactory(emf);
+//        return sharedEntityManagerBean;
+//    }
 
 }

@@ -1,18 +1,18 @@
 package org.example.persistence.jpa;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.example.model.Country;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
 @Repository("countryRepositoryJpa")
 public class CountryRepository {
 
-    @PersistenceContext
+    @Autowired
     private EntityManager em;
 
     public Optional<Country> findById(String code) {
