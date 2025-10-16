@@ -13,10 +13,10 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
-import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.images.PullPolicy;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.postgresql.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
 import javax.sql.DataSource;
@@ -33,7 +33,7 @@ class CountryServiceIT {
 
     private static final Logger log = LoggerFactory.getLogger(CountryServiceIT.class);
     @Container
-    static PostgreSQLContainer<?> postgresWorldDB = new PostgreSQLContainer<>(
+    static PostgreSQLContainer postgresWorldDB = new PostgreSQLContainer(
             DockerImageName.parse("ghusta/postgres-world-db:2.12").asCompatibleSubstituteFor("postgres"))
             .withImagePullPolicy(PullPolicy.alwaysPull()) // https://java.testcontainers.org/features/advanced_options/#image-pull-policy
             .withDatabaseName("world-db")
