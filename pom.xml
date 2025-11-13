@@ -23,7 +23,7 @@
         <spring-framework.version>7.0.0-RC3</spring-framework.version>
         <spring-data.version>2025.1.0-RC2</spring-data.version>
         <hibernate.version>7.1.4.Final</hibernate.version>
-        <jackson.version>2.20.0</jackson.version>
+        <jackson.version>2.20.1</jackson.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <testcontainers.version>2.0.1</testcontainers.version>
     </properties>
