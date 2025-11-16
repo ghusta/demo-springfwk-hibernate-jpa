@@ -23,7 +23,7 @@
         <spring-framework.version>7.0.0</spring-framework.version>
         <spring-data.version>2025.1.0</spring-data.version>
         <hibernate.version>7.1.7.Final</hibernate.version>
-        <jackson.version>2.20.1</jackson.version>
+        <jackson.version>3.0.2</jackson.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <testcontainers.version>2.0.2</testcontainers.version>
     </properties>
@@ -47,7 +47,7 @@
             </dependency>
 
             <dependency>
-                <groupId>com.fasterxml.jackson</groupId>
+                <groupId>tools.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
                 <version>${jackson.version}</version>
                 <type>pom</type>
@@ -112,9 +112,9 @@
 
         <!-- Jackson for JSON handling -->
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
+            <groupId>tools.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+            <version>3.0.2</version>
         </dependency>
 
         <dependency>
