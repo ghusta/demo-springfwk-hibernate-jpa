@@ -22,7 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <spring-framework.version>7.0.2</spring-framework.version>
-        <spring-data.version>2025.1.0</spring-data.version>
+        <spring-data.version>2025.1.1</spring-data.version>
         <hibernate.version>7.1.11.Final</hibernate.version>
         <jackson.version>3.0.3</jackson.version>
         <mapstruct.version>1.6.3</mapstruct.version>
