@@ -108,6 +108,7 @@
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-processor</artifactId>
             <version>${hibernate.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Jackson for JSON handling -->
