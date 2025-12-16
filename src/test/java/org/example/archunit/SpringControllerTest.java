@@ -1,7 +1,9 @@
 package org.example.archunit;
 
 import com.tngtech.archunit.core.domain.JavaClasses;
+import com.tngtech.archunit.core.domain.JavaMethod;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
+import com.tngtech.archunit.lang.ArchCondition;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.conditions.ArchConditions;
 import de.rweisleder.archunit.spring.framework.SpringControllerRules;
@@ -19,6 +21,7 @@ import java.util.Arrays;
 import static com.tngtech.archunit.base.DescribedPredicate.describe;
 import static com.tngtech.archunit.core.importer.ImportOption.Predefined.DO_NOT_INCLUDE_TESTS;
 import static com.tngtech.archunit.lang.conditions.ArchConditions.be;
+import static com.tngtech.archunit.lang.conditions.ArchConditions.have;
 import static com.tngtech.archunit.lang.conditions.ArchPredicates.are;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 import static de.rweisleder.archunit.spring.SpringAnnotationPredicates.springAnnotatedWith;
@@ -61,17 +64,20 @@ class SpringControllerTest {
 
     static final ArchRule all_paths_lowercase =
             methods()
-                    .that(
-                            are(springAnnotatedWith(RequestMapping.class)
-                                    .as("annotated with @RequestMapping (or @GetMapping, @PostMapping etc.)"))
-                    )
-                    .should(
-                            be(springAnnotatedWith(RequestMapping.class,
-                                    describe("@RequestMapping(path=<lower-case>)",
-                                            requestMapping -> Arrays.stream(requestMapping.path())
-                                                    .allMatch(path -> path.toLowerCase().equals(path))))
-                            ).as("have path containing only lowercase characters")
-                    );
+                    .that(are(springAnnotatedWith(RequestMapping.class)
+                            .as("annotated with @RequestMapping (or @GetMapping, @PostMapping etc.)")))
+                    .should(havePathLowercaseInRequestMapping());
+
+    private static ArchCondition<? super JavaMethod> havePathLowercaseInRequestMapping() {
+        return have(springAnnotatedWith(RequestMapping.class,
+                describe("@RequestMapping(path=<lower-case>)",
+                        (RequestMapping requestMapping) -> {
+                            String[] paths = requestMapping.path();
+                            return Arrays.stream(requestMapping.path())
+                                    .allMatch(path -> path.toLowerCase().equals(path));
+                        }))
+        ).as("have path containing only lowercase characters");
+    }
 
     static final ArchRule no_trailing_slash_in_request_mappings =
             methods()
