@@ -26,7 +26,7 @@ import static de.rweisleder.archunit.spring.SpringAnnotationPredicates.springAnn
 class SpringControllerTest {
 
     private static JavaClasses importedClasses;
-    private static JavaClasses importedClassesController;
+    private static JavaClasses importedClassesFromPackageController;
 
     @BeforeAll
     static void setUpGlobal() {
@@ -34,19 +34,19 @@ class SpringControllerTest {
                 .withImportOption(DO_NOT_INCLUDE_TESTS)
                 .importPackages("org.example");
 
-        importedClassesController = new ClassFileImporter()
+        importedClassesFromPackageController = new ClassFileImporter()
                 .withImportOption(DO_NOT_INCLUDE_TESTS)
                 .importPackages("org.example.controller");
     }
 
     @Test
     void controller_name_without_request_mapping() {
-        SpringControllerRules.ControllerNameWithoutRequestMapping.check(importedClassesController);
+        SpringControllerRules.ControllerNameWithoutRequestMapping.check(importedClassesFromPackageController);
     }
 
     @Test
     void test_request_mapping_in_controller_classes() {
-        request_mapping_in_controller_classes.check(importedClassesController);
+        request_mapping_in_controller_classes.check(importedClassesFromPackageController);
     }
 
     static final ArchRule request_mapping_in_controller_classes =
@@ -56,7 +56,7 @@ class SpringControllerTest {
 
     @Test
     void controller_all_paths_lowercase() {
-        all_paths_lowercase.check(importedClassesController);
+        all_paths_lowercase.check(importedClassesFromPackageController);
     }
 
     static final ArchRule all_paths_lowercase =
