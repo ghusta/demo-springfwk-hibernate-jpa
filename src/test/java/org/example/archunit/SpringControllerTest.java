@@ -7,6 +7,7 @@ import com.tngtech.archunit.lang.conditions.ArchConditions;
 import de.rweisleder.archunit.spring.framework.SpringControllerRules;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +43,16 @@ class SpringControllerTest {
     void controller_name_without_request_mapping() {
         SpringControllerRules.ControllerNameWithoutRequestMapping.check(importedClassesController);
     }
+
+    @Test
+    void test_request_mapping_in_controller_classes() {
+        request_mapping_in_controller_classes.check(importedClassesController);
+    }
+
+    static final ArchRule request_mapping_in_controller_classes =
+            methods()
+                    .that(are(springAnnotatedWith(RequestMapping.class)))
+                    .should().beDeclaredInClassesThat(are(springAnnotatedWith(Controller.class)));
 
     @Test
     void controller_all_paths_lowercase() {
