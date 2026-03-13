@@ -35,7 +35,7 @@ class CountryServiceIT {
 
     @Container
     static PostgreSQLContainer postgresWorldDB = new PostgreSQLContainer(
-            DockerImageName.parse("ghusta/postgres-world-db:2.12").asCompatibleSubstituteFor("postgres"))
+            DockerImageName.parse("ghusta/postgres-world-db:2.14").asCompatibleSubstituteFor("postgres"))
             .withImagePullPolicy(PullPolicy.alwaysPull()) // https://java.testcontainers.org/features/advanced_options/#image-pull-policy
             .withDatabaseName("world-db")
             .withUsername("world")
