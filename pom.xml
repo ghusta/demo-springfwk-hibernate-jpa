@@ -26,7 +26,7 @@
         <hibernate.version>7.2.11.Final</hibernate.version>
         <jackson.version>3.0.4</jackson.version>
         <mapstruct.version>1.6.3</mapstruct.version>
-        <testcontainers.version>2.0.4</testcontainers.version>
+        <testcontainers.version>2.0.5</testcontainers.version>
     </properties>
 
     <dependencyManagement>
